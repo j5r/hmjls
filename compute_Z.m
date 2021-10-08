@@ -7,11 +7,13 @@
 %
 % struct2 = compute_Z(Struct, x0, n_steps)
 % 
-% The parameters given are the Struct from "parse_mmjls" or "validate_mmjls",
-% the initial state "x0" (you can let it empty x0=[] to be generated
-% automatically), "n_steps" is the number of the branchs
-% continuous+discrete domains, i.e., for computing Z(:,:,r) for r = 1:n_steps + 1
-% (plus one because the initial state is done in r = 1, not r = 0).
+% The parameters given are 
+% (A) Struct: from "parse_mmjls" or "validate_mmjls",
+% (B) x0: the initial state (you can let it empty x0=[] to be generated
+%        automatically), 
+% (C) "n_steps" is the number of the branchs continuous+discrete domains, 
+%        i.e., for computing Z(:,:,r) for r = 1:n_steps + 1
+%        (plus one because the initial state is done in r = 1, not r = 0).
 %
 % The struct2 returned has the fields explained below.
 %   struct2.values: (nnN x n_steps+1) the values of Z themselves, as vectorized 
@@ -24,12 +26,12 @@
 %            reshape(struct2.values, struct2.shape_full)
 %   struct2.trace_indexes: (nxN) the indexes of the trace of Z, for time=1.
 %        You can get the values of the trace of Z by doing
-%            for time = 1:n_steps+1
-%                Z_ = Z(:,:,:,time);
-%                for i = 1:N % N is the number of Markov states
-%                    Z_trace(i,time) = sum( Z_(struct2.trace_indexes(:,i)) );
-%                end
-%            end
+%        |  for time = 1:n_steps+1
+%        |      Z_ = Z(:,:,:,time);
+%        |      for i = 1:N % N is the number of Markov states
+%        |          Z_trace(i,time) = sum( Z_(struct2.trace_indexes(:,i)) );
+%        |      end
+%        |  end
 %   struct2.x0: (nx1) the x(0) given or the x(0) generated.
 %
 
