@@ -53,7 +53,7 @@ Y_vec = zeros(shape_vec);
 % computing the initial value of Y, i.e., Y(0)
 Y0 = zeros(n, n, Struct.nmarkov);
 for i = 1:Struct.nmarkov
-    Y0(:,:,i) = Struct.pi0(i) * (x0*x0'); % X_i(0) = x0*x0' * [pi0(i)]
+    Y0(:,:,i) = Struct.init_distrib(i) * (x0*x0'); % X_i(0) = x0*x0' * [pi0(i)]
 end
 % assigning the initial value of Y to Y_vec
 Y_vec(:,1) = Y0(:);
