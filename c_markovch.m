@@ -54,8 +54,12 @@ states = init_state;
 
 % the 1st arrival time
 arrival_times = [0, exprnd(-1/RateMatrix(init_state,init_state))];
-% the 1st probability matrix from the infinitesimal generator RateMatrix
-probMtrix = expm(RateMatrix*arrival_times(end));
+% the probability matrix: it is proportional to the RateMatrix
+probMtrix = abs(RateMatrix);
+for k=1:size(probMtrix, 1)
+    probMtrix(k,:) = probMtrix(k,:) / probMtrix(k,k);
+    probMtrix(k,k) = 0;
+end
 %
 next_state = find(rand < cumsum(probMtrix(init_state,:)), 1);
 states = [states, next_state];
@@ -65,8 +69,7 @@ while cum_sum_times < t_max
     init_state = next_state;
     new_time = exprnd(-1/RateMatrix(init_state,init_state));
     arrival_times = [arrival_times, new_time];
-    cum_sum_times = cum_sum_times + new_time;
-    probMtrix = expm(RateMatrix*arrival_times(end));
+    cum_sum_times = cum_sum_times + new_time;    
     next_state = find(rand < cumsum(probMtrix(init_state,:)), 1);
     states = [states, next_state];
 end

@@ -34,12 +34,19 @@ end
 
 ANS = simulate_Yr_once(Struct, x0, n_switch_times);
 ANS.values = ANS.values / MC;
+
+w_bar = waitbar(0,{'Monte Carlo simulation is running...',...
+    'Do not close this wait bar!'});
+% running Monte Carlo
 for mc = 2:MC
     if ~mod(mc,17)
-        fprintf('%.2f%%\n',100*mc/MC)
+        percent = mc / MC;
+        waitbar(percent, w_bar);
     end
 Y = simulate_Yr_once(Struct, x0, n_switch_times);
 ANS.values = ANS.values + Y.values / MC;
 end
+close(w_bar);
+
 ANS.MC = MC;
 end
