@@ -76,8 +76,10 @@ opAd = kron(ProbMatrix', eye(sizeA(1)^2) ) * diagD;
 
 % boldface operator [A]: expected action of the calAd
 boldA = opAd *0;
-for i =1:numel(mu)
-    boldA = boldA + (opAd^(i-1)) * mu(i);
+powerOpAd = eye(size(opAd));
+for i = 1:numel(mu)    
+    boldA = boldA + powerOpAd * mu(i);
+    powerOpAd = powerOpAd * opAd;
 end
 
 %% condition for definiteness of calligraph L (and hence T)
