@@ -25,7 +25,7 @@ if nargin == 0
     return
 end
 
-if nargin < 2
+if nargin < 3
     init_state = randi([1, size(ProbMatrix,1)]);
 end
 
