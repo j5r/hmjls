@@ -1,4 +1,4 @@
-%
+% 
 % By Junior R. Ribeiro, Oct 8, 2021, jrodrib@usp.br
 %
 % This function simulates a continuous-time Markov Chain.
