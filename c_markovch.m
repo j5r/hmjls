@@ -49,6 +49,8 @@ end
 msg = sprintf('init_state must be between 1 and %d',size(RateMatrix,1));
 assert(init_state >= 1, msg)
 assert(init_state <= size(RateMatrix,1), msg)
+assert(norm(sum(RateMatrix,2))< 1e-10, 'All the rows of RateMatrix must sum up to zero.');
+assert(all(all((RateMatrix-diag(diag(RateMatrix)))>=0)),'All the diagonal-off elements of RateMatrix must be non-negative.');
 
 states = init_state;
 
